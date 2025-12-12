@@ -2,25 +2,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XOoov 1M - Free Fire Rewards</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>X0oov 1M - Verify</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
-    <h1>XOoov 1M Rewards</h1>
-    <p class="tagline">Free Fire Bundles & Emotes</p>
+  <header class="header">
+    <div class="logo">⚡ X0oov 1M</div>
+    <div><a href="bundles.html" class="btn">Bundles</a> <a href="main.html" class="btn">Rewards</a></div>
+  </header>
+
+  <section class="hero">
+    <h1>Claim your Free Fire Emotes & Bundles</h1>
+    <p class="sub">Subscribe & watch 3 Shorts to unlock the rewards page.</p>
 
     <div class="card">
-        <h2>Claim Your Rewards</h2>
-        <p>Subscribe to XOooV YouTube channel to unlock:</p>
+      <h3>Step 1 — Watch Shorts</h3>
+      <p>Click each short below (they open in YouTube). After opening all 3, you will be redirected automatically.</p>
+
+      <div class="shorts" id="shorts">
+        <button class="short-btn" data-id="s1" data-url="https://youtube.com/shorts/C7IX1WFpm0c?si=MG90GviNPtdHcxnc">▶ Short 1</button>
+        <button class="short-btn" data-id="s2" data-url="https://youtube.com/shorts/JsaIgdH9QGA?si=ihEA6ebsBzdpCAVa">▶ Short 2</button>
+        <button class="short-btn" data-id="s3" data-url="https://youtube.com/shorts/q0RknO-Nw5I?si=Mbz-t1g-rNgjXzrb">▶ Short 3</button>
+      </div>
+
+      <div class="actions">
+        <button id="subscribeBtn" class="btn subscribe">Subscribe (Open Channel)</button>
+        <button id="proceedBtn" class="btn next disabled" disabled>Proceed</button>
+      </div>
+
+      <div class="channels">
+        <small>Channels:</small>
         <ul>
-            <li>🔥 Exclusive Bundles</li>
-            <li>💥 Rare Emotes</li>
+          <li><a href="https://youtube.com/@tez_wala_secr?si=abnEUEaaxw_JlOij" target="_blank">Tez Wala Secr</a></li>
+          <li><a href="https://youtube.com/@frolicflix07?si=eGGHWwh_6hYVlJ7g" target="_blank">FrolicFlix07</a></li>
+          <li><a href="https://youtube.com/@xoooov_1m?si=X6N5KBDnJ-kTW45e" target="_blank">XOoov_1M</a></li>
         </ul>
-        <a href="#" class="btn">Subscribe Now</a>
+      </div>
     </div>
+  </section>
+
+  <footer>Made with ❤️ — X0oov 1M</footer>
 </div>
+
+<script>
+const shortBtns = document.querySelectorAll('.short-btn');
+const proceed = document.getElementById('proceedBtn');
+let clicked = new Set();
+
+shortBtns.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const id = btn.dataset.id;
+    const url = btn.dataset.url;
+    window.open(url, '_blank');
+    clicked.add(id);
+    btn.classList.add('clicked');
+    if(clicked.size>=3){
+      proceed.disabled = false;
+      proceed.classList.remove('disabled');
+      setTimeout(()=> { window.location.href='main.html'; }, 700);
+    }
+  });
+});
+
+document.getElementById('subscribeBtn').addEventListener('click', ()=>{
+  window.open('https://youtube.com/@xoooov_1m?si=X6N5KBDnJ-kTW45e','_blank');
+});
+</script>
 </body>
 </html>

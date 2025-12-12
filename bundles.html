@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>X0oov 1M - Bundles</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <header class="header"><div class="logo">⚡ X0oov 1M</div><div><a href="index.html" class="btn">Home</a> <a href="main.html" class="btn">Rewards</a></div></header>
+  <section class="hero">
+    <h1>All Bundles</h1>
+    <p class="sub">Browse popular bundles. Click card to view (demo).</p>
+    <div class="grid" id="bundlesGrid">
+    </div>
+    <footer>Made with ❤️ — X0oov 1M</footer>
+  </section>
+</div>
+
+<script>
+const bundles = [
+  {title:'Assassin Bundle', img:'https://via.placeholder.com/400x240?text=Assassin'},
+  {title:'Cobra Rage', img:'https://via.placeholder.com/400x240?text=Cobra+Rage'},
+  {title:'Hip Hop Bundle', img:'https://via.placeholder.com/400x240?text=Hip+Hop'},
+  {title:'Galaxy Suit', img:'https://via.placeholder.com/400x240?text=Galaxy'},
+  {title:'Royal Gold Set', img:'https://via.placeholder.com/400x240?text=Royal+Gold'},
+  {title:'Street Boy', img:'https://via.placeholder.com/400x240?text=Street+Boy'},
+  {title:'Sakura', img:'https://via.placeholder.com/400x240?text=Sakura'},
+  {title:'Money Heist', img:'https://via.placeholder.com/400x240?text=Money+Heist'}
+];
+
+const grid = document.getElementById('bundlesGrid');
+bundles.forEach(b=>{
+  const div = document.createElement('div');
+  div.className='card';
+  div.innerHTML = `<img class="bundle-img" src="${b.img}" alt="${b.title}"><div class="bundle-title">${b.title}</div><p style="color:#9fb6c1">Demo bundle description</p>`;
+  grid.appendChild(div);
+});
+</script>
+</body>
+</html>

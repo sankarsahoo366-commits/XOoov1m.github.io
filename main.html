@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>X0oov 1M - Rewards</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <header class="header">
+    <div class="logo">⚡ X0oov 1M</div>
+    <div><a href="index.html" class="btn">Home</a> <a href="bundles.html" class="btn">Bundles</a></div>
+  </header>
+
+  <section class="hero">
+    <h1>Rewards — Emotes & EVO</h1>
+    <p class="sub">Choose server, add UIDs, pick emotes or EVOs and simulate claim (demo).</p>
+
+    <div class="card">
+      <h3>Server & UIDs</h3>
+      <label>Choose Server</label>
+      <select id="server" class="select">
+        <option value="">-- select server --</option>
+        <option value="IN1">India - IN1</option>
+        <option value="IN2">India - IN2</option>
+        <option value="BD1">Bangladesh - BD1</option>
+      </select>
+
+      <label>Enter UID</label>
+      <input id="uid" class="select" placeholder="Enter UID (9-12 digits)">
+      <button id="addUid" class="btn next" style="margin-top:10px">+ Add UID</button>
+      <div id="uidList" style="margin-top:10px;color:#9fb6c1"></div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3>Normal Emotes</h3>
+      <div class="emote-grid" id="normalEmotes">
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3>EVO Emotes (Separate)</h3>
+      <div class="emote-grid" id="evoEmotes">
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3>Selected</h3>
+      <div class="status"><div><strong>Server:</strong> <span id="statusServer">Not selected</span></div>
+      <div><strong>UIDs:</strong> <span id="countUID">0</span></div>
+      <div><strong>Emote:</strong> <span id="statusEmote">None</span></div></div>
+      <div style="margin-top:10px">
+        <button id="submit" class="btn next">Submit (Demo)</button>
+      </div>
+    </div>
+
+    <footer>Made with ❤️ — X0oov 1M</footer>
+  </section>
+</div>
+
+<script>
+// sample emote lists (more can be added)
+const normalList = [
+  {id:'909037011', name:'Fist Max'},
+  {id:'909000081', name:'M10 Max'},
+  {id:'909049012', name:'Open Fire'},
+  {id:'909042007', name:'100 Gloo'},
+  {id:'909051009', name:'LOL Emote'},
+  {id:'909051006', name:'Flowers of Love'}
+];
+const evoList = [
+  {id:'EVO01', name:'Dragon Booyah EVO'},
+  {id:'EVO02', name:'MP40 EVO'},
+  {id:'EVO03', name:'SCAR EVO'},
+  {id:'EVO04', name:'AN94 EVO'}
+];
+
+const normalContainer = document.getElementById('normalEmotes');
+const evoContainer = document.getElementById('evoEmotes');
+let selectedEmote = null;
+let uids = [];
+
+function renderList(list, container, isEvo=false){
+  list.forEach(e=>{
+    const b = document.createElement('button');
+    b.className='emote';
+    b.textContent = e.name;
+    b.dataset.id = e.id;
+    b.addEventListener('click', ()=>{
+      selectedEmote = e;
+      document.getElementById('statusEmote').textContent = e.name + ' ('+e.id+')';
+      document.querySelectorAll('.emote').forEach(x=>x.classList.remove('selected'));
+      b.classList.add('selected');
+    });
+    container.appendChild(b);
+  });
+}
+
+renderList(normalList, normalContainer);
+renderList(evoList, evoContainer, true);
+
+// UID add
+document.getElementById('addUid').addEventListener('click', ()=>{
+  const v = document.getElementById('uid').value.trim();
+  if(!/^\d{9,12}$/.test(v)){ alert('Enter valid UID (9-12 digits)'); return; }
+  uids.push(v);
+  document.getElementById('uidList').textContent = 'UIDs: ' + uids.join(', ');
+  document.getElementById('countUID').textContent = uids.length;
+  document.getElementById('uid').value='';
+});
+
+// server select
+document.getElementById('server').addEventListener('change', (e)=>{
+  const v = e.target.value;
+  document.getElementById('statusServer').textContent = v || 'Not selected';
+});
+
+// submit demo
+document.getElementById('submit').addEventListener('click', ()=>{
+  if(!document.getElementById('server').value) return alert('Select server first');
+  if(uids.length===0) return alert('Add at least 1 UID');
+  if(!selectedEmote) return alert('Select an emote');
+  alert('Submitted! (demo only) - Server:' + document.getElementById('server').value + ', UIDs:' + uids.join(',') + ', Emote:' + selectedEmote.name);
+});
+</script>
+</body>
+</html>
